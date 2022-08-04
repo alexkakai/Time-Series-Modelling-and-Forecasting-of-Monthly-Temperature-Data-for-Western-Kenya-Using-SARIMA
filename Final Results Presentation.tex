@@ -1,0 +1,592 @@
+\documentclass[]{beamer}
+\usepackage{beamerthemesplit}
+\usepackage{subfigure}
+\usepackage{chngcntr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\setbeamertemplate{footline}[frame number]{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+\captionsetup[figure]{font=scriptsize,labelfont=scriptsize}
+\captionsetup[figure]{labelformat=empty}
+\captionsetup[table]{labelformat=empty}
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{final.bib}
+\title{Time Series Modelling and Forecasting of monthly Temperature data for western Kenya using seasonal ARIMA method}
+\author{Alex Barasa Kakai\\
+SCB384-C003-4369/2014}
+\addtobeamertemplate{title page}{}{\begin{center}Supervisor: Prof. Joseph Mung'atu\end{center}}
+\institute{Jomo Kenyatta University of Agriculture and Technology}     
+\date{\today}
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+\section[Outline]{}
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+\subsection{Background study}
+\begin{frame}
+	\frametitle{Background study}
+  \begin{itemize}
+  \item Currently, climate change marked by global warming has occurred. \parencite{letcher2009}
+  \item Global temperatures have increased by between 0.4$^{0} C$ and 0.8 $^{0}C$ in the past century and could rise by between 1.4 $^{0}C$ and 5.8 $^{0}C$ by the end of the 21$^{st}$ century.\parencite{ipcc2013}
+  \item Global warming has acquired the status of a key national policy challenge.\parencite{ipcc2013}
+  \item  Agriculture is an essential part of both the National Climate Change Implementation Framework and National Climate Change Action Plan \parencite{19}, thus reflecting reliance on agriculture for the national economy.
+  \end{itemize}
+\end{frame}
+
+\subsection{Statement of the problem}
+\begin{frame}
+	\frametitle{Statement of the problem} 
+The emerging dominant narratives in Kenya are focused on the need to protect food security and agricultural resources from the negative impacts of global warming \parencite{12}, and on the other hand, possible opportunities for capitalizing on carbon funding \parencite{19}
+\end{frame}
+\subsection{Objectives}
+\begin{frame}
+\frametitle{General Objective and Specific Objectives} 
+To analyse, model and forecast western Kenya's monthly minimum and maximum temperature recordings over a certain period of time to help predict future temperature trends.\\
+Specific Objectives:\\
+\begin{enumerate}
+	\item To analyse variations in the monthly minimum and maximum temperatures. 
+	\item To fit a Seasonal ARIMA model for monthly minimum and maximum temperatures.
+	\item To carry out short-term forecasts to predict future temperature trends using the best fitted model.
+\end{enumerate}
+\end{frame}
+\subsection{Hypothesis}
+\begin{frame}
+	\frametitle{Hypothesis}
+	\begin{enumerate}
+		\item $ H_{0} $: There is no significant dependence and correlation in the residuals of Temperature Recordings data in Kenya.
+		\item $ H_{0}$: The residuals from Temperature Recordings data  have zero mean and constant variance.
+	\end{enumerate}
+\end{frame}
+\section{Literature review}
+
+\subsection{Theoretical Review}
+\begin{frame}
+\frametitle{Theoretical Review}
+In their early studies \cite{02} generalized the ARIMA model to deal with seasonality by forming a multiplicative seasonal ARIMA model (SARIMA).This model even though is more complicated with both the seasonal and non-seasonal autoregressive components having their PACF and ACF cutting at the seasonal and non-seasonal lags, it allows for randomness in the seasonal pattern from one cycle to the next.
+\end{frame}
+\subsection{Empirical Review}
+\begin{frame}
+\fontsize{8pt}{7.2}\selectfont
+\frametitle{Empirical Review}
+\begin{itemize}
+\item\cite{26} applied seasonal ARIMA model to the time series monthly precipitation data from 1961 to 2011 in Yantai, China. They found that the model SARIMA (1,0,1)(0,1,1)$^{12}$ fitted the past data and could be used successfully for forecasting. Based on this model they predicted that the  precipitation  in the next three years for the region  will decrease.
+\item\cite{23} forecasted mean temperature by using SARIMA model in Ashanti region of Ghana by analysing past temperature data from 1980 to 2013. The conclusion was that the best model for forecasting was SARIMA (2,1,1)(1,1,2)$^{12}$ as the model recorded the least BIC values. For the forecasts, the ME, RMSE, MAE, MAPE values were evaluated.
+\item\cite{22} modelled time series SARIMA model and used it to analyse and forecast the maximum and minimum air temperatures of Nairobi City from 1985 to 2014. Based on the results of the ACF and PACF, SARIMA (0,0,2)(0,1,1)$^{12}$ for maximum temperature and SARIMA (1,0,0)(0,1,1)$^{12}$ for minimum temperature models were picked. On general scale it was realized that the minimum temperature was gradually increasing over the years supporting the fact that global warming was real.
+\end{itemize}	
+\end{frame}
+\section{Methodology}
+\begin{frame}
+\frametitle{SARIMA (p,d,q)(P,D,Q)s model}
+A time series can possess a seasonal component that repeats every $ S $ observations, for monthly observations $S = 12$. The Seasonal ARIMA models are defined by seven parameters of the form :
+\begin{equation}
+	\phi_{p}(B)\Phi_{P}(B^{s})W_{t}=\theta_{q}(B)\Theta_{Q}(B^{s})Z_{t}
+\end{equation}
+where B denotes the back-shift operator,$\phi_{p},\Phi_{P},\theta_{q},\Theta_{Q} $ are polynomials of order p,P,q,Q, respectively, $ Z_{t} $ denotes a purely random process and
+\begin{equation}
+	W_{t}=\nabla^{d}\nabla_{s}^{D}X_{t}
+\end{equation} and we write
+\begin{equation}
+	X_{t}\sim ARIMA(p,d,q)
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Proposed Box and Jenkins Methodology}
+To identify a perfect ARIMA model for a particular time series, Box and Jenkins proposed a methodology that consists of four phases, namely:
+\begin{itemize}
+\item Model identification
+\item Estimation of parameters
+\item Diagnostic checks
+\item Forecasting
+\end{itemize}
+\end{frame}
+\section{Results and Discussions}
+\begin{frame}
+\frametitle{Results and Discussions}
+In this chapter a more in-depth analysis of the data is done. The chapter is organised in four sections with respect to the objectives of the study as follows:
+\begin{itemize}
+\item Data exploration using the time plot to check and uncover insights to help identify areas of interest or patterns in the data
+\item Model identification and selection for the monthly minimum and maximum temperatures for the two stations
+\item Properties of the selected temperature models identified
+\item Forecasting using the models selected
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Data Exploration}
+\fontsize{8pt}{7.2}\selectfont
+\begin{columns}
+	\begin{column}[t]{3cm}
+		\begin{figure}
+		\includegraphics[width=4cm]{png/kachminmax}
+		\caption{Kakamega Station}
+		\end{figure}
+	\end{column}
+	\begin{column}[t]{3cm}
+		\begin{figure}
+		\includegraphics[width=4cm]{png/eldRplot}
+		\caption{Eldoret Station}
+	\end{figure}
+	\end{column}
+\end{columns}
+\begin{itemize}
+\item Time plot of both maximum and minimum temperature of both Kakamega and Eldoret Stations. 
+\item Maximum temperature of Kakamega is centred around a mean of 26$^{0}$C while that of Eldoret is centred at 24$ ^{0}$C
+\item Minimum temperature: Kakamega is centred around a mean of 14$^{0} $C while for Eldoret is centred around a mean of 10$^{0}$C 		
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Trend Line Plot}
+\fontsize{8pt}{7.2}\selectfont
+	\begin{columns}
+		\begin{column}[c]{3cm}
+			\begin{figure}
+			\includegraphics[width=4cm]{png/kachmaxtrend}
+			\includegraphics[width=4cm]{png/kachmintrend}
+			\caption{Kakamega Station}
+		\end{figure}
+		\end{column}
+		\begin{column}[c]{3cm}
+			\begin{figure}
+			\includegraphics[width=4cm]{png/trendmaxeld}
+			\includegraphics[width=4cm]{png/trendmineld}
+			\caption{Eldoret Station}
+		\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{ACF/PACF Kakamega and Eldoret}
+\fontsize{8pt}{7.2}\selectfont
+\begin{columns}
+\begin{column}[c]{3cm}
+	\begin{figure}
+\includegraphics[width=3cm]{png/kachacf}
+\includegraphics[width=3cm]{png/pacfkach}
+\caption{Maximum Temp}
+\end{figure}
+\end{column}
+\begin{column}[c]{3cm}
+	\begin{figure}
+\includegraphics[width=3cm]{png/acfkachmin}
+\includegraphics[width=3cm]{png/pacfkachmin}
+\caption{Minimum Temp}
+\end{figure}
+\end{column}
+\begin{column}[c]{3cm}
+	\begin{figure}
+		\includegraphics[width=3cm]{png/eldacfmax}
+		\includegraphics[width=3cm]{png/eldpacfmax}
+		\caption{Maximum Temp}
+	\end{figure}
+\end{column}
+\begin{column}[c]{3cm}
+	\begin{figure}
+		\includegraphics[width=3cm]{png/eldacfmax}
+		\includegraphics[width=3cm]{png/eldpacfmax}
+		\caption{Maximum Temp}
+	\end{figure}
+\end{column}
+\end{columns}
+\fontsize{8pt}{7.2}\selectfont
+P-values of 0.4368 and 0.4627 for Kakamega and 0.4037 and 0.3488 for Eldoret were obtained when the Augmented Dickey-Fuller Test is performed on the minimum and maximum temperature data respectively.
+\end{frame}
+
+\begin{frame}
+\frametitle{ACF/PACF of Differenced Data of Kakamega and Eldoret}	
+\fontsize{8pt}{7.2}\selectfont
+\begin{columns}
+	\begin{column}[c]{3cm}
+		\begin{figure}
+			\includegraphics[width=3cm]{png/maxacfdfkach}
+			\includegraphics[width=3cm]{png/maxpacfdfkach}
+			\caption{Maximum Temp}
+		\end{figure}
+	\end{column}
+	\begin{column}[c]{3cm}
+		\begin{figure}
+			\includegraphics[width=3cm]{png/minacfdfkach}
+			\includegraphics[width=3cm]{png/minpacfdfkach}
+			\caption{Minimum Temp}
+		\end{figure}
+	\end{column}
+	\begin{column}[c]{3cm}
+		\begin{figure}
+			\includegraphics[width=3cm]{png/acfdifmaxeld}
+			\includegraphics[width=3cm]{png/pacfdifmaxeld}
+			\caption{Maximum Temp}
+		\end{figure}
+	\end{column}
+	\begin{column}[c]{3cm}
+		\begin{figure}
+			\includegraphics[width=3cm]{png/acfdifmineld}
+			\includegraphics[width=3cm]{png/pacfdifmineld}
+			\caption{Minimum Temp}
+		\end{figure}
+	\end{column}
+\end{columns}
+\fontsize{8pt}{7.2}\selectfont
+After differencing, a p-value of less than 0.01 was achieved when both the Augmented Dickey-Fuller Test was performed, which is below 0.05 showing stationarity had been achieved.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Model identification and selection}
+	\fontsize{8pt}{7.2}\selectfont
+	\begin{table}[h!]
+		\begin{minipage}{.5\linewidth}
+			Kakamega
+			\begin{center}
+				$ SARIMA(2,1,0)(1,1,1)_{12} $\\ 
+				$ SARIMA(2,1,0)(0,1,1)_{12} $\\
+				$ SARIMA(2,0,0)(1,1,1)_{12} $\\
+				$ SARIMA(2,0,0)(0,1,1)_{12} $\\
+			\end{center}
+			\caption{Minimum Temperature}
+		\end{minipage}\hfill
+		\label{tab:table61}%
+		\begin{minipage}{.5\linewidth}
+			\begin{center}
+				$ SARIMA(1,1,0)(0,1,1)_{12} $\\ 
+				$ SARIMA(1,1,0)(2,1,1)_{12} $\\
+				$ SARIMA(1,0,0)(0,1,1)_{12} $\\ 
+				$ SARIMA(1,0,0)(2,1,1)_{12} $\\
+			\end{center}
+			\caption{Maximum Temperature}
+		\end{minipage}\hfill
+		\label{tab:table62}
+	\end{table}
+\begin{table}[h!]
+	\begin{minipage}{.5\linewidth}
+		Eldoret
+		\begin{center}
+			$ SARIMA(1,1,1)(1,1,1)_{12} $\\ 
+			$ SARIMA(1,0,1)(1,1,1)_{12} $\\
+			$ SARIMA(1,1,1)(0,1,1)_{12} $\\
+			$ SARIMA(1,0,1)(0,1,1)_{12} $\\
+		\end{center}
+		\caption{Minimum Temperature}
+	\end{minipage}\hfill
+	\label{tab:table63}%
+	\begin{minipage}{.5\linewidth}
+		\begin{center}
+			$ SARIMA(1,0,0)(0,1,1)_{12} $\\ 
+			$ SARIMA(1,0,0)(0,1,2)_{12} $\\
+			$ SARIMA(1,0,0)(1,1,1)_{12} $\\ 
+			$ SARIMA(1,0,0)(1,1,2)_{12} $\\
+		\end{center}
+		\caption{Maximum Temperature}
+	\end{minipage}\hfill
+	\label{tab:table64}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Statistics for tentative models}
+\fontsize{5pt}{7.2}\selectfont
+\begin{columns}
+\hspace*{-2cm}
+\begin{column}{0.25\textwidth}
+\begin{table}
+\begin{tabular}{c c c c}
+			Models&AIC&AICc&BIC\\
+			\hline
+			SARIMA(2,1,0)(1,1,1)$_{12}$ & 600.11 & 600.27 & 619.69\\			
+			SARIMA(2,1,0)(0,1,1)$_{12}$ & 598.31 & 598.42 & 613.97\\			
+			SARIMA(2,0,0)(1,1,1)$_{12}$ & 561.06 & 561.23 & 580.66\\			
+			SARIMA(2,0,0)(0,1,1)$_{12}$ & 559.67 & 559.78 & 575.35\\
+		\end{tabular}
+		\caption{ Kakamega Minimum Temperature}
+\end{table}
+\begin{table}
+		\begin{tabular}{c c c c}
+			Models&AIC&BIC&AICc\\
+			\hline
+			SARIMA(1,1,0)(0,1,1)$_{12}$ & 1100.8 & 1100.87 & 1112.55\\			
+			SARIMA(1,1,0)(2,1,1)$_{12}$ & 1101.39 & 1101.55 & 1120.97\\			
+			SARIMA(1,0,0)(0,1,1)$_{12}$ & 1005.17 & 1005.24 & 1016.93\\			
+			SARIMA(1,0,0)(2,1,1)$_{12}$ & 1006.03 & 1006.19 & 1025.62\\	
+		\end{tabular}
+		\caption{Kakamega Maximum Temperature}
+		\label{tab:table5}
+\end{table}
+\end{column}
+\begin{column}{.25\textwidth}
+	\begin{table}[h!]
+			\begin{tabular}{c c c c}
+				Models & AIC & AICc & BIC\\
+				\hline
+				SARIMA(1,0,1)(1,1,1)$_{12}$ & 927.54 & 927.70 & 947.13\\
+				SARIMA(1,1,1)(1,1,1)$_{12}$ & 946.42 & 946.58 & 966\\
+				SARIMA(1,1,1)(0,1,1)$_{12}$ & 944.45 & 944.56 & 960.12\\
+				SARIMA(1,0,1)(0,1,1)$_{12}$ & 926.30 & 926.41 & 941.98\\
+			\end{tabular}
+			\caption{Eldoret Minimum Temperature}
+	\end{table}
+	\begin{table}[h!]
+			\begin{tabular}{c c c c}
+				Models&AIC&BIC&AICc\\
+				\hline
+				SARIMA(1,0,0)(0,1,1)$_{12}$ & 808.87 & 820.63 & 808.94\\
+				SARIMA(1,0,0)(0,1,2)$_{12}$& 810.87 & 826.55 & 810.98\\
+				SARIMA(1,0,0)(1,1,1)$_{12}$ & 810.87 & 826.55 & 810.98\\
+				SARIMA(1,0,0)(1,1,2)$_{12}$& 809.77 & 829.37 & 809.94\\
+			\end{tabular}
+			\caption{Eldoret Maximum Temperature}
+			\label{tab:table51}
+	\end{table}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Parameter Estimation}
+	\fontsize{5pt}{7.5}\selectfont
+	\begin{columns}
+		\hspace*{-2cm}
+		\begin{column}{0.25\textwidth}
+			\begin{table}[h!]
+				\begin{center}
+					SARIMA(2,0,0)(0,1,1)$_{12}$
+				\end{center}
+					\begin{tabular}{c| c| c}
+							\hline
+							Parameter & Estimate & Standard Error\\
+							\hline
+							ar1 & 0.4279 & 0.0523\\ 
+							ar2 & 0.2135 & 0.0510 \\
+							sma1 & -0.8839 & 0.0374\\
+							\hline
+						\end{tabular}
+			\end{table}
+			\begin{table}
+				\begin{center}
+					SARIMA(1,0,0)(0,1,1)$_{12}$\\
+					\begin{tabular}{c| c| c}
+						\hline
+						Parameter & Estimate & Standard Error\\
+						\hline
+						ar1 & 0.3604 & 0.0504 \\
+						sma1 & -0.9081 & 0.0323 \\
+						\hline
+					\end{tabular}
+				\end{center}
+			\end{table}
+		\begin{table}[h!]
+			\begin{center}
+				Box-Ljung Test\\
+				\begin{tabular}{c c c c}
+					\hline
+					& X-squared & df & P Value\\
+					\hline
+					SARIMA(2,0,0)(0,1,1)$_{12}$	& 25.559 & 24 & 0.2238\\
+					SARIMA(1,0,0)(0,1,1)$_{12}$	& 29.873 & 24 & 0.1216\\
+					\hline
+				\end{tabular}
+			\end{center}
+		\end{table}
+		\end{column}
+		\begin{column}{.25\textwidth}
+			\begin{table}[h!]
+				\begin{center}
+					SARIMA(1,0,1)(0,1,1)$_{12}$\\
+					\begin{tabular}{c| c| c}
+						\hline
+						Parameter &Estimate & Standard Error\\
+						\hline
+						ar1 & 0.8405 & 0.0506 \\
+						ma1 & -0.5386 & 0.0768 \\
+						sma1 & -0.9123 & 0.0351 \\
+						\hline
+					\end{tabular}
+				\end{center}
+			\end{table}
+			\begin{table}[h!]
+			\begin{center}
+				SARIMA(1,0,0)(0,1,1)$_{12}$\\
+				\begin{tabular}{c| c| c}
+					\hline
+					Parameter &Estimate &Standard Error\\
+					\hline
+					ar1 & 0.5127 & 0.0446 \\
+					sma1 & -0.9322 & 0.0365 \\
+					\hline
+				\end{tabular}
+			\end{center}
+			\end{table}
+		\begin{table}[h!]
+			\begin{center}
+				Box-Ljung Test\\
+				\begin{tabular}{c c c c}
+					\hline
+					& X-squared & df & P Value\\
+					\hline
+					SARIMA(1,0,1)(0,1,1)$_{12}$	& 33.131 & 24 & 0.1013\\
+					SARIMA(1,0,0)(0,1,1)$_{12}$	& 14.824 & 24 & 0.9258\\
+					\hline
+				\end{tabular}
+			\end{center}
+		\end{table}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagnostic Analysis for Kakamega Station}
+	\fontsize{5pt}{7.2}\selectfont
+	\begin{columns}
+		\hspace*{-2cm}
+		\begin{column}[c]{4cm}
+			\begin{figure}
+				\includegraphics[width=6cm,height=6cm]{png/reskachmin}
+			\end{figure}
+		\end{column}
+		\begin{column}[c]{4cm}
+			\begin{figure}
+				\includegraphics[width=6cm,height=6cm]{png/reskachmax}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Diagnostic Analysis for Eldoret Station}
+	\fontsize{5pt}{7.2}\selectfont
+	\begin{columns}
+		\hspace*{-2cm}
+		\begin{column}[c]{4cm}
+			\begin{figure}
+				\includegraphics[width=6cm,height=5cm]{png/resield}
+			\end{figure}
+		\end{column}
+		\begin{column}[c]{4cm}
+			\begin{figure}
+				\includegraphics[width=6cm,height=5cm]{png/resield2}
+			\end{figure}
+		\end{column}
+	\end{columns}
+There's little presence of outliers, it can be observed the residuals are approximately normal. Both the plots of the ACF and PACF of the residuals lack enough evidence of significant spikes that are outside the confidence bounds hence clearly shows that the residuals are white noise.
+\end{frame}
+
+\begin{frame}
+\frametitle{Forecasting: Kakamega Station}
+\fontsize{5pt}{7.5}\selectfont
+\begin{columns}
+	\begin{column}{.25\textwidth}
+		\begin{center}
+		\begin{table}
+				Minimum Temperature\\
+				SARIMA(2,0,0)(0,1,1)$_{12} $\\
+				\begin{tabular}{c| c}
+					\hline
+					MAE & 0.1144612 \\
+					MAPE & 2.687615 \\
+					RMSE & 0.3807247 \\
+					MPE & 0.1144612\\
+					MASE & 0.03123463 \\
+					ME & 0.4875491 \\
+				\end{tabular}
+		\end{table}
+	\end{center}
+	\begin{figure}[H]
+	\hspace*{-2cm}\includegraphics[ width=6cm,height=3cm]{png/kachminfo}	
+	\end{figure}
+	\end{column}
+	\begin{column}{.25\textwidth}
+	\begin{table}
+		\begin{center}
+			Maximum Temperature\\
+			SARIMA(1,0,0)(0,1,1)$_{12}$\\
+			\begin{tabular}{c| c}
+				\hline
+				MAE & 0.6277194 \\
+				MAPE & 2.267641 \\
+				RMSE & 0.8868727 \\
+				MPE & 0.2550877 \\
+				MASE & 0.6747479 \\
+				ME & 0.09383642 \\
+			\end{tabular}
+		\end{center}
+	\end{table}
+	\begin{figure}[H]	
+	\hspace*{-1cm}\includegraphics[ width=6cm,height=3cm]{png/kachmaxfo}
+	\end{figure}	
+	\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}
+	\frametitle{Forecasting: Eldoret Station}
+	\fontsize{5pt}{7.5}\selectfont
+	\begin{columns}
+		\begin{column}{.25\textwidth}
+			\begin{table}
+				\begin{center}
+					Minimum Temperature\\
+					SARIMA(1,0,1)(0,1,1)$_{12}$\\
+					\begin{tabular}{c| c}
+						\hline
+						MAE & 0.5646188 \\
+						MAPE & 5.360194 \\
+						RMSE & 0.794963 \\
+						MPE & -0.2591158 \\
+						MASE & 0.6355165 \\
+						ME & 0.02420571 \\
+					\end{tabular}	
+				\end{center}
+			\end{table}
+			\begin{figure}[H]
+			\hspace*{-2cm}\includegraphics[ width=6cm,height=3cm]{png/eldminfo}	
+			\end{figure}
+		\end{column}
+		\begin{column}{.25\textwidth}
+			\begin{table}
+				\begin{center}
+					Maximum Temperature\\
+					SARIMA(1,0,0)(0,1,1)$_{12}$\\
+					\begin{tabular}{c| c}
+						\hline
+						MAE & 0.5122463 \\
+						MAPE & 2.183582 \\
+						RMSE & 0.6779582 \\
+						MPE & -0.05379152 \\
+						MASE & 0.6176843 \\
+						ME & 0.003334289 \\
+					\end{tabular}
+				\end{center}
+			\end{table}
+			\begin{figure}[H]	
+			\hspace*{-1cm}\includegraphics[ width=6cm,height=3cm]{png/eldmaxfo}
+			\end{figure}	
+		\end{column}
+	\end{columns}
+\end{frame}
+\section{Summary, Conclusion and Recommendation}
+\begin{frame}
+\begin{itemize}
+	\item Summary:
+The minimum temperature has a slight upward trend, increasing over time with Kakamega station having an average of 0.18$^{0}$C while Eldoret station has 0.12$^{0}$C yearly increment.	
+	\item Conclusion:
+The best models selected with the aid of AIC criterion in Kakamega Stations were: SARIMA(2,0,0)(0,1,1)$_{12}$ and SARIMA(1,0,0)(0,1,1)$_{12}$ while for Edoret station were: SARIMA(1,0,1)(0,1,1)$_{12}$ and SARIMA(1,0,0)(0,1,1)$_{12}$ for minimum and maximum temperature respectively.
+	\item Recommendation:
+The predictions based on the models indicated that the minimum temperature will continue to rise in the coming years. This shows a distinct trend proving that indeed globe warming is a fact and is happening. 		
+\end{itemize}
+\end{frame}
+\printbibliography
+\begin{frame}
+	 \begin{center}
+			\font\endfont = cmss8 at 15.40mm
+			\endfont 
+			\baselineskip 20.0mm 
+		THANK YOU
+\end{center}
+\end{frame}
+
+\end{document}
